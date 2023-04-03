@@ -1,0 +1,7 @@
+{
+  "name": "My SSAS Driver",
+  "description": "A custom driver for SSAS",
+  "driver_class": "my.ssas.driver",
+  "jar_file": "ssas-driver-0.1.0-SNAPSHOT-standalone.jar",
+  "permissions": []
+}
