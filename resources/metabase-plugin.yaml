@@ -1,0 +1,38 @@
+info:
+  name: SSAS Connector
+  version: 1.0.0-SNAPSHOT
+  description: A custom connector for connecting to SQL Server Analysis Services using the OLAP4J driver.
+  contact-info:
+    name: Your Name Here
+    address: your.email@example.com
+driver:
+  name: ssas
+  display-name: SQL Server Analysis Services (OLAP4J)
+  lazy-load: true
+  parent: sql-jdbc
+  connection-properties:
+    - name: server
+      display-name: Server
+      placeholder: my-ssas-server.example.com
+      required: true
+    - name: database
+      display-name: Database
+      placeholder: my-ssas-database
+      required: true
+    - name: user
+      display-name: Username
+      placeholder: my-ssas-username
+      required: true
+    - name: password
+      display-name: Password
+      placeholder: my-ssas-password
+      required: true
+    - name: provider
+      display-name: Provider
+      placeholder: MSOLAP
+      required: true
+init:
+  - step: load-namespace
+    namespace: metabase_ssas
+  - step: register-jdbc-driver
+    class: org.olap4j.driver.xmla.XmlaOlap4jDriver

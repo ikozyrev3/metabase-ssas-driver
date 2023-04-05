@@ -1,7 +1,25 @@
-{
-  "name": "My SSAS Driver",
-  "description": "A custom driver for SSAS",
-  "driver_class": "my.ssas.driver",
-  "jar_file": "ssas-driver-0.1.0-SNAPSHOT-standalone.jar",
-  "permissions": []
-}
+{:name "my.ssas.driver"
+ :description "My SSAS driver"
+ :version "0.1.0-SNAPSHOT"
+ :url "https://github.com/my-username/my-repo"
+ :license {:name "MIT"
+           :url "https://opensource.org/licenses/MIT"}
+ :metabase {:module-type :driver
+            :driver-class "my.ssas.driver"
+            :name "My SSAS Driver"
+            :description "A driver for Microsoft SQL Server Analysis Services (SSAS)"
+            :tags ["ssas" "microsoft" "olap"]
+            :logo-url "https://my-company.com/images/ssas-driver-logo.png"
+            :options {:host {:name "Host"
+                             :description "The hostname or IP address of the SSAS server"
+                             :type "string"
+                             :required true}
+                      :port {:name "Port"
+                             :description "The port number for the SSAS server"
+                             :type "integer"
+                             :required true
+                             :default 2382}
+                      :database {:name "Database"
+                                  :description "The name of the SSAS database"
+                                  :type "string"
+                                  :required true}}}}
