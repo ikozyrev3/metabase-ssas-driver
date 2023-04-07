@@ -7,12 +7,20 @@
             [clojure.java.jdbc :as jdbc]
             [clojure.java.jdbc.sql :as sql]))
 
+(defmethod jdbc/connection-details->spec :ssas [details]
+  {:classname "my.ssas.driver.Driver"
+   :subprotocol "my-ssas-driver"
+   :subname (str "//" (:host details) ":" (:port details) "/" (:database details))
+   :user (:username details)
+   :password (:password details)})
+   
 (defn register []
   {:metabase.driver/name "My SSAS Driver"
    :metabase.driver/url  "jdbc:my-ssas-driver://localhost:1234/mydb"
    :metabase.driver/class-for-name "my.ssas.driver.Driver"
    :metabase.driver/protocol "my-ssas-driver"
-   :metabase.driver/jdbc-requirements {:class-for-name "my.ssas.driver.Driver"}
+   :metabase.driver/jdbc-requirements {:class-for-name "my.ssas.driver.Driver"
+                                       :connection-details->spec :ssas}
    :jdbc-driver {:name "my-ssas-driver"
                  :class-name "my.ssas.driver.Driver"
                  :subprotocol "my-ssas-driver"

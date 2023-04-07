@@ -33,6 +33,6 @@ driver:
       required: true
 init:
   - step: load-namespace
-    namespace: metabase_ssas
+    namespace: my.ssas.driver
   - step: register-jdbc-driver
     class: org.olap4j.driver.xmla.XmlaOlap4jDriver
