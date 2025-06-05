@@ -18,7 +18,7 @@
 (deftest test-connection-details-spec
   (testing "Connection details to spec conversion"
     (let [details {:host "localhost" :port 1433 :database "testdb" :username "user" :password "pass"}
-          spec (jdbc/connection-details->spec :ssas details)]
+          spec (connection-details->spec details)]
       (is (= "my.ssas.driver.Driver" (:classname spec)))
       (is (= "my-ssas-driver" (:subprotocol spec)))
       (is (= "//localhost:1433/testdb" (:subname spec)))
