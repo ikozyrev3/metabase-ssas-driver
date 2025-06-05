@@ -5,6 +5,9 @@
   (:require [clojure.string :as str]
             [clojure.java.jdbc :as jdbc]))
 
+;; Metabase driver interface (compatible with standalone testing)
+(defonce driver-name :ssas)
+
 ;; Connection spec creation function
 (defn connection-details->spec [details]
   {:classname "my.ssas.driver.Driver"
@@ -12,14 +15,15 @@
    :subname (str "//" (:host details) ":" (:port details) "/" (:database details))
    :user (:username details)
    :password (:password details)})
-   
+
+;; Driver registration function for Metabase
 (defn register []
   {:metabase.driver/name "My SSAS Driver"
    :metabase.driver/url  "jdbc:my-ssas-driver://localhost:1234/mydb"
    :metabase.driver/class-for-name "my.ssas.driver.Driver"
    :metabase.driver/protocol "my-ssas-driver"
    :metabase.driver/jdbc-requirements {:class-for-name "my.ssas.driver.Driver"
-                                       :connection-details->spec :ssas}
+                                       :connection-details->spec connection-details->spec}
    :jdbc-driver {:name "my-ssas-driver"
                  :class-name "my.ssas.driver.Driver"
                  :subprotocol "my-ssas-driver"
